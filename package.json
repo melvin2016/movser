@@ -1,0 +1,21 @@
+{
+  "name": "nextmovieapp",
+  "version": "1.0.0",
+  "description": "Nextjs Movie App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev",
+    "start": "nodemon app.js"
+  },
+  "author": "MELVIN GEORGE",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.4.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "next": "^7.0.2",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
+  }
+}
