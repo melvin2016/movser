@@ -10,9 +10,9 @@ Next.js Movie\Series Searcher
 To Run Server In Development Mode
 =================================
 
-* ```javascript npm run dev ```
+* ```npm run dev```
 
 To run In Production Mode
 =========================
 
-* ```javascript npm start ```
+* ```npm start ```
