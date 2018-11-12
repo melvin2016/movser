@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -15,7 +16,7 @@ nextApp.prepare().then(()=>{
 
     /**using next routes module */
     app.use(nextRoutes.Router);
-
+    console.log(process.env.TMDB_KEY);
     /**listening on assigned PORT */
     app.listen(PORT,()=>{
         console.log(`Server listening on PORT : ${PORT}`)
