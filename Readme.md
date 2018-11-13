@@ -5,7 +5,7 @@ Next.js Movie\Series Searcher
 * Search for your series.
 * Give Synopsis
 
-**_Based On OMDB API_**
+**_Based On TMDB API_**
 
 To Run Server In Development Mode
 =================================
