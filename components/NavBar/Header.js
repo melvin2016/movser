@@ -8,6 +8,9 @@ import DrawerRes from './DrawerRes';
 import { withStyles} from '@material-ui/core';
 import Link from 'next/link';
 const styles = {
+    root:{
+        marginBottom:'30px'
+    },
     ButtonStyle:{
         backgroundColor:'#25348c',
         padding:'5px',
@@ -47,7 +50,7 @@ class Header extends React.Component{
     render(){
         const {classes} = this.props;
         return( 
-            <AppBar>
+            <AppBar className={classes.root}>
                 <ToolBar>
                     <Hidden mdUp>
                         <DrawerRes navbarMenuHandler={this.navbarMenuHandler} onClose={this.onClose} open={this.state.navbar.open} lists={this.state.navbar.lists}/>
