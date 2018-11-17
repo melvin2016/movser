@@ -1,9 +1,8 @@
 import React from 'react';
-import NavResponsive from '../components/NavBar/NavResponsive';
+import Layout from '../components/Layout';
 const Index = (props)=>{
     return(
-        <>
-            <NavResponsive lists={[{name:'SEARCH',href:'/search'},{name:'LOCATION',href:'location'}]}/>
+        <Layout>
             <div className="container">
                 <div className="row">
                     <div className="col s12">
@@ -46,7 +45,7 @@ const Index = (props)=>{
             
                 `}</style>
             </div>
-        </>
+        </Layout>
     );
 }
 export default Index;
