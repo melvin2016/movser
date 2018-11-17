@@ -26,6 +26,7 @@ export default class MyApp extends App {
             <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
             {/* <!--Let browser know website is optimized for mobile--> */}
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="theme-color" content="#4db6ac" />
           </Head>
         <Component {...pageProps} />
       </Container>

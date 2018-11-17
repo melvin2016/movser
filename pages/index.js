@@ -25,7 +25,7 @@ const Index = (props)=>{
                                     Powered By TMDB.
                                 </p>
                             </div>
-                            <div class="card-action">
+                            <div className="card-action">
                             <a href="https://github.com/melvin2016/movserNext">GitHub Repo</a>
                             </div>
                         </div>
