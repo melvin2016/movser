@@ -9,17 +9,22 @@ export default class extends React.Component{
         this.searchRef = React.createRef();
     }
     componentDidMount(){
+        /**focusing on input when page reloads */
         this.searchRef.current.focus();
     }
+    /**static promise fetchMulti() */
     static fetchMulti = async (query)=>{
+        //Getting TMDB_KEY
         const TMDB_KEY = getConfig().publicRuntimeConfig.TMDB_KEY;
         const res = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}&api_key=${TMDB_KEY}&language=en-US&page=1&include_adult=true`);
         const jsonRes = await res.json();
         return {jsonRes:jsonRes};
     }
+    /**Returning props nextjs based function */
     static getInitialProps(context){
         return this.fetchMulti(context.query.name || 'Batman');
     }
+    
     render(){
         return(
             <Layout>
