@@ -3,7 +3,7 @@ import NavResponsive from './NavBar/NavResponsive';
 
 export default (props)=>(
     <>
-        <NavResponsive lists={[{name:'SEARCH',href:'/search'},{name:'LOCATION',href:'location'}]}/>
+        <NavResponsive page={props.page} lists={[{name:'SEARCH',href:'/search',icon:'search'},{name:'LOCATION',href:'/location',icon:'location_on'}]}/>
         {props.children}
     </>
 );

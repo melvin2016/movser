@@ -13,12 +13,12 @@ class NavResponsive extends React.Component{
             <>
                 <div className="navbar-fixed">
                     <nav className="nav-wrapper teal lighten-2">
-                        <Link href="/"><a className="brand-logo">MOVSER</a></Link>
+                        <Link href="/"><a className="brand-logo"> MOVSER</a></Link>
                         <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down"> 
                             {
                                 this.props.lists.map((list)=>(
-                                    <Link key={list.href} href={list.href}><li><a>{list.name}</a></li></Link>
+                                    <Link key={list.href} href={list.href}><li className={list.href===this.props.page?"active":""}><a style={{display : 'flex',alignItems : 'center'}}><i className="material-icons left" >{list.icon}</i>{list.name}</a></li></Link>
                                 ))
                             }
                         </ul>
@@ -27,7 +27,7 @@ class NavResponsive extends React.Component{
                 <ul className="sidenav" ref={this.navRef} id="mobile-demo">
                 {
                     this.props.lists.map((list)=>(
-                        <Link key={list.href} href={list.href}><li><a>{list.name}</a></li></Link>
+                        <Link key={list.href} href={list.href}><li className={list.href===this.props.page?"active":""}><a><i className="material-icons left">{list.icon}</i>{list.name}</a></li></Link>
                     ))
                 }
                 </ul>

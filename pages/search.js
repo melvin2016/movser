@@ -7,27 +7,48 @@ import SearchLists from '../components/SearchLists/SearchLists';
 export default class Search extends React.Component{
     constructor(props){
         super(props);
-        this.searchRef = React.createRef();
         this.state={
             query:null,
-            jsonRes:null
+            tabs:null,
+            page:'/search'
         }
+        this.searchRef = React.createRef();
+        this.ulRef = React.createRef();
     }
     componentDidMount(){
         /**focusing on input when page reloads */
-        this.setState({
-            jsonRes:this.props.jsonRes
-        })
         this.searchRef.current.focus();
-        
+        /**setting state from getInitialProps static fn. */
+        this.setState({
+            tabs:this.props.tabs
+        });
+        /**Initialising Tabs using refs */
+        M.Tabs.init(this.ulRef.current);
+        //console loging
+        console.log("ul",this.ulRef);
     }
+    
     /**static promise fetchMulti() */
      static fetchMulti = async (query)=>{
         //Getting TMDB_KEY
         const TMDB_KEY = getConfig().publicRuntimeConfig.TMDB_KEY;
         const res = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}&api_key=${TMDB_KEY}&language=en-US&page=1&include_adult=true`);
         const jsonRes = await res.json();
-        return {jsonRes:jsonRes};
+        const tabs = {
+            tvTab : [],
+            movieTab : [], 
+            personTab : []
+        };
+        jsonRes.results.map((list)=>{
+            if(list.media_type === 'tv'){
+                tabs.tvTab.push(list);
+            }else if(list.media_type === 'movie'){
+                tabs.movieTab.push(list);
+            }else{
+                tabs.personTab.push(list);
+            }
+        });
+        return {tabs:tabs};
     }
     /**Returning props nextjs based function */
     static getInitialProps(context){
@@ -41,11 +62,11 @@ export default class Search extends React.Component{
             return;
         }
         Search.fetchMulti.call(this,this.state.query)
-            .then(({jsonRes})=>{
+            .then(({tabs})=>{
                 this.setState({
-                    jsonRes:jsonRes
+                    tabs:tabs
                 });
-                console.log(this.state.jsonRes);
+                console.log(this.state.tabs);
             })
             .catch((err)=>{
                 console.log(err);
@@ -71,9 +92,9 @@ export default class Search extends React.Component{
     
     render(){
         return(
-            <Layout>
+            <Layout page={this.state.page}>
                 {/* Place Console log under This Comment */}
-                    {console.log(this.state.jsonRes)}
+                    {console.log(this.state.tabs)}
 
                 <div className="container">
                     <div className="row">
@@ -89,11 +110,22 @@ export default class Search extends React.Component{
                         </div>
                         
                         {
-                            this.state.jsonRes !== null?
+                            this.state.tabs !== null?
                             <div className="row">
                                 <div className="divider"/>
+                                <div className="row">
+                                    <ul className="tabs tabs-fixed-width" ref={this.ulRef} >
+                                        {this.state.tabs.movieTab.length !== 0 ?<li className="tab col s3"><a href="#movies">Movies</a></li>:null}
+                                        {this.state.tabs.tvTab.length !== 0 ? <li className="tab col s3"><a href="#tv">Series</a></li>:null}
+                                        {this.state.tabs.personTab.length !== 0 ? <li className="tab col s3"><a href="#people">People</a></li>:null}
+                                    </ul>
+                                    <div  id="movies" className="col s12">MOVIES</div>
+                                    <div id="tv" className="col s12">SERIES</div>
+                                    <div id="people" className="col s12">PEOPLE</div>
+                                </div>
                                 <div className="col s12 cards-container">
-                                    <SearchLists lists={this.state.jsonRes.results}/>
+
+                                    {/* <SearchListslists {this.state.jsonRes.results}/> */}
                                 </div>
                             </div>:
                             null
