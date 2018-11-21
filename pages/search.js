@@ -9,7 +9,11 @@ export default class Search extends React.Component{
         super(props);
         this.state={
             query:null,
-            tabs:null,
+            tabs:{
+                movieTab:[],
+                tvTab:[],
+                personTab:[]
+            },
             page:'/search'
         }
         this.searchRef = React.createRef();
@@ -22,12 +26,11 @@ export default class Search extends React.Component{
         this.setState({
             tabs:this.props.tabs
         });
-        /**Initialising Tabs using refs */
+        //Initialising Tabs for materialize
         M.Tabs.init(this.ulRef.current);
         //console loging
         console.log("ul",this.ulRef);
     }
-    
     /**static promise fetchMulti() */
      static fetchMulti = async (query)=>{
         //Getting TMDB_KEY
@@ -108,16 +111,14 @@ export default class Search extends React.Component{
                                 <i className="material-icons left">search</i>
                             </button>
                         </div>
-                        
-                        {
-                            this.state.tabs !== null?
                             <div className="row">
                                 <div className="divider"/>
                                 <div className="row">
                                     <ul className="tabs tabs-fixed-width" ref={this.ulRef} >
-                                        {this.state.tabs.movieTab.length !== 0 ?<li className="tab col s3"><a href="#movies">Movies</a></li>:null}
-                                        {this.state.tabs.tvTab.length !== 0 ? <li className="tab col s3"><a href="#tv">Series</a></li>:null}
-                                        {this.state.tabs.personTab.length !== 0 ? <li className="tab col s3"><a href="#people">People</a></li>:null}
+                                        <li className={`tab col s3 active ${this.state.tabs.movieTab.length !== 0?"disables":""}`}>
+                                        <a href="#movies">Movies</a></li>
+                                        <li className={`tab col s3 ${this.state.tabs.tvTab.length !== 0?"disables":""}`}><a href="#tv">Series</a></li> 
+                                        <li className={`tab col s3 ${this.state.tabs.personTab.length !== 0?"disables":""}`}><a href="#people">People</a></li>
                                     </ul>
                                     <div  id="movies" className="col s12">MOVIES</div>
                                     <div id="tv" className="col s12">SERIES</div>
@@ -127,9 +128,7 @@ export default class Search extends React.Component{
 
                                     {/* <SearchListslists {this.state.jsonRes.results}/> */}
                                 </div>
-                            </div>:
-                            null
-                        }
+                            </div>y
                     </div>
                 </div>
                 <style jsx>{`
