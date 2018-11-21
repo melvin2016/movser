@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "node": "nodemon app.js"
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "author": "MELVIN GEORGE",
   "license": "ISC",
