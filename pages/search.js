@@ -12,13 +12,15 @@ export default class Search extends React.Component{
             tabs:{
                 movieTab:[],
                 tvTab:[],
-                personTab:[]
+                personTab:[],
+                greatLength:''
             },
             page:'/search'
         }
         this.searchRef = React.createRef();
         this.ulRef = React.createRef();
     }
+    
     componentDidMount(){
         /**focusing on input when page reloads */
         this.searchRef.current.focus();
@@ -92,7 +94,7 @@ export default class Search extends React.Component{
             });
         }
     }
-    
+   
     render(){
         return(
             <Layout page={this.state.page}>
@@ -101,11 +103,11 @@ export default class Search extends React.Component{
 
                 <div className="container">
                     <div className="row">
-                        <div className="input-field col l9 m9 s12">
+                        <div className="input-field col l9 m9 s12 ">
                             <input placeholder="eg :Batman" type="text" id="search" onKeyUp={this.inputHandler} ref={this.searchRef}/>
                             <label id="search">Search Movie / Series</label>
                         </div>
-                        <div className="col l3 m3 s12">
+                        <div className="col l3 m3 s12" id="btnSubmit">
                             <button onClick={this.searchHandler} className="btn btn-small waves-effect waves-light searchBtn" type="submit">
                                 Search
                                 <i className="material-icons left">search</i>
@@ -115,20 +117,31 @@ export default class Search extends React.Component{
                                 <div className="divider"/>
                                 <div className="row">
                                     <ul className="tabs tabs-fixed-width" ref={this.ulRef} >
-                                        <li className={`tab col s3 active ${this.state.tabs.movieTab.length !== 0?"disables":""}`}>
-                                        <a href="#movies">Movies</a></li>
-                                        <li className={`tab col s3 ${this.state.tabs.tvTab.length !== 0?"disables":""}`}><a href="#tv">Series</a></li> 
-                                        <li className={`tab col s3 ${this.state.tabs.personTab.length !== 0?"disables":""}`}><a href="#people">People</a></li>
+                                        <li className={`tab col s3 ${this.state.tabs.movieTab.length === 0?"disabled":""}`}>
+                                            <a href="#movies">Movies</a>
+                                        </li>
+                                        <li className={`tab col s3 ${this.state.tabs.tvTab.length === 0?"disabled":""}`}>
+                                            <a href="#tv">Series</a>
+                                        </li> 
+                                        <li className={`tab col s3 ${this.state.tabs.personTab.length === 0?"disabled":""}`}>
+                                            <a href="#people">People</a>
+                                        </li>
                                     </ul>
-                                    <div  id="movies" className="col s12">MOVIES</div>
-                                    <div id="tv" className="col s12">SERIES</div>
-                                    <div id="people" className="col s12">PEOPLE</div>
+                                    
                                 </div>
                                 <div className="col s12 cards-container">
-
-                                    {/* <SearchListslists {this.state.jsonRes.results}/> */}
+                                    <div  id="movies" className="col s12">
+                                            <SearchLists lists={this.state.tabs.movieTab}/>
+                                        </div>
+                                        <div id="tv" className="col s12">
+                                            <SearchLists lists={this.state.tabs.tvTab}/>
+                                        </div>
+                                        <div id="people" className="col s12">
+                                            <SearchLists lists={this.state.tabs.personTab}/>
+                                    </div>
+                                    
                                 </div>
-                            </div>y
+                            </div>
                     </div>
                 </div>
                 <style jsx>{`
