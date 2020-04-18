@@ -20,7 +20,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "morgan": "^1.9.1",
-    "next": "^7.0.2",
+    "next": "^9.3.2",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "typeface-roboto": "0.0.54"
